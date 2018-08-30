@@ -86,5 +86,7 @@ environment:
       PYTHON_ARCH: "64"
 
 build_script:
+  - ECHO "%PYTHON_VERSION%"
+  - set PATH=%PYTHON%\\scripts;%PATH%
   # Build the compiled extension
   - "%CMD_IN_ENV% python build.py"
