@@ -4,13 +4,13 @@ import sys
 import platform
 import smtplib
 if sys.version_info < (3, 0):
-    import email.MIMEMultipart
-    import email.MIMEText
-    import email.MIMEBase
+    from email import MIMEMultipart
+    from email import MIMEText
+    from email import MIMEBase
 else:
-    from email.mime.text import MIMEText
-    from email.mime.multipart import MIMEMultipart
-    from email.mime.base import MIMEBase
+    import email.mime.text as  MIMEText
+    import email.mime.multipart as MIMEMultipart
+    import email.mime.base as MIMEBase
 
 
 #获取python文件所在的路径
