@@ -3,9 +3,14 @@ import os
 import sys
 import platform
 import smtplib
-import email.MIMEMultipart
-import email.MIMEText
-import email.MIMEBase
+if sys.version_info < (3, 0):
+    import email.MIMEMultipart
+    import email.MIMEText
+    import email.MIMEBase
+else:
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+    from email.mime.base import MIMEBase
 
 
 #获取python文件所在的路径
@@ -23,13 +28,37 @@ pyPath = p()
 os.chdir(p())
 #拉取代码
 os.system("git clone https://github.com/yuangu/sxtwl_cpp.git")
+
+# print("========执行转码开始================")
+# for cxxPath in ["./sxtwl_cpp/src", "./sxtwl_cpp/python"]:
+#     src_path = os.path.join(pyPath, cxxPath)
+#     dirs = os.listdir( src_path  )
+#     for file in dirs:
+#         if file[-3:] == "cpp" or file[-1] == 'h' or file[-3:] == "cxx" :     
+#             filename = os.path.join(src_path, file)
+#             content = "".join(open(filename).readlines())
+#             try:
+#                 content = content.decode("utf8").encode("gbk") #如果是utf8编码就转成gbk
+#                 f = open(filename, "w")
+#                 f.write(content)
+#                 f.close()
+#                 print("转码完成:" + filename )
+#             except:
+#                 print("转码失败:" + filename)
+#                 continue
+
+# print("========执行转码完成================") 
+
 #代码完成拉取
 os.chdir(os.path.join(pyPath, "./sxtwl_cpp/python"))
 
+print("=================开始执行python setup.py ========")
 if platform.system() == 'Windows':
-    os.system("python setup.py  bdist_wininst")
+    print("打包执行中")
+    print(os.system("python setup.py  bdist_wininst"))
+print("=================打包完成========")
 
-print(u"=================打包完成========")
+
 #更换到打包好的目录里
 os.chdir(os.path.join(pyPath, "./sxtwl_cpp/python/dist"))
 
@@ -49,9 +78,9 @@ passwd = "a1269325139"
 
 server = smtplib.SMTP('smtp.126.com')
 server.login(username,passwd)
-main_msg = email.MIMEMultipart.MIMEMultipart()
+main_msg = MIMEMultipart.MIMEMultipart()
 # 构造MIMEText对象做为邮件显示内容并附加到根容器
-text_msg = email.MIMEText.MIMEText("this is a test text to text mime")
+text_msg = MIMEText.MIMEText("this is a test text to text mime")
 main_msg.attach(text_msg)
  
 # 构造MIMEBase对象做为文件附件内容并附加到根容器
@@ -60,7 +89,7 @@ maintype, subtype = contype.split('/', 1)
  
 ## 读入文件内容并格式化
 data = open(file_name, 'rb')
-file_msg = email.MIMEBase.MIMEBase(maintype, subtype)
+file_msg = MIMEBase.MIMEBase(maintype, subtype)
 file_msg.set_payload(data.read( ))
 data.close( )
 email.Encoders.encode_base64(file_msg)

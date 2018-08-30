@@ -1,9 +1,5 @@
 environment:
-  global:
-    # SDK v7.0 MSVC Express 2008's SetEnv.cmd script will fail if the
-    # /E:ON and /V:ON options are not enabled in the batch script intepreter
-    # See: http://stackoverflow.com/a/13751649/163740
-    CMD_IN_ENV: "cmd /E:ON /V:ON /C .\\appveyor\\run_with_env.cmd"
+   
 
   matrix:
 
@@ -86,7 +82,35 @@ environment:
       PYTHON_ARCH: "64"
 
 build_script:
-  - ECHO "%PYTHON_VERSION%"
-  - set PATH=%PYTHON%\\scripts;%PATH%
+  # - ECHO "Installed SDKs:"
+  # - ps: "ls \"C:/Program Files/Microsoft SDKs/Windows\""
+  # # Workaround for failing builds on Python 3.x 64 bit (taken from SpiceyPy project)
+  # - IF "%PYTHON_ARCH%"=="32" (call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x86) ELSE (ECHO "probably a 64bit build")
+  # - IF "%PYTHON_ARCH%"=="64" (call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64) ELSE (ECHO "probably a 32bit build")
+  - set PATH=%PYTHON%;%PYTHON%\\scripts;%PATH%
+  - set VS90COMNTOOLS=%VS140COMNTOOLS%
+  - echo %VS90COMNTOOLS%
+  - cd "c:\Users\appveyor\AppData\Local\Programs\Common\Microsoft\"
+  - ren "Visual C++ for Python" "Visual C++ for Python Do Not Use"
+  - cd "C:\Program Files (x86)\"
+  - ren "Microsoft Visual Studio 9.0" "Microsoft Visual Studio 9.0 Do Not Use"
+
+  - "pip --version"
+  - "pip install --upgrade setuptools"
+  - "python -m pip install wheel"
+  - "python -m pip install twine"
+  - "python --version"
+  # - "%PYTHON%\\python.exe -c \"import struct;print( 8 * struct.calcsize('P'))\""
+
+  - echo %APPVEYOR_REPO_BRANCH%
+
+  - IF "%PYTHON_ARCH%"=="64" (call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64) ELSE ( call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86)
+  - cd %APPVEYOR_BUILD_FOLDER%  #回到原来目录里
+
+  
   # Build the compiled extension
-  - "%CMD_IN_ENV% python build.py"
+  - python build.py
+  # - cd ./sxtwl_cpp/python
+  # - python setup.py  bdist_wininst
+  # - cd ../../
+  # - python sendmail.py
