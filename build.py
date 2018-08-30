@@ -7,11 +7,14 @@ if sys.version_info < (3, 0):
     from email import MIMEMultipart
     from email import MIMEText
     from email import MIMEBase
+    from email import Encoders 
+    from email.Utils import formatdate
 else:
     import email.mime.text as  MIMEText
     import email.mime.multipart as MIMEMultipart
     import email.mime.base as MIMEBase
-
+    import email.encoders as Encoders
+    from email.utils import formatdate
 
 #获取python文件所在的路径
 def p():
@@ -92,7 +95,7 @@ data = open(file_name, 'rb')
 file_msg = MIMEBase.MIMEBase(maintype, subtype)
 file_msg.set_payload(data.read( ))
 data.close( )
-email.Encoders.encode_base64(file_msg)
+Encoders.encode_base64(file_msg)
  
 ## 设置附件头
 basename = os.path.basename(file_name)
@@ -104,7 +107,7 @@ main_msg.attach(file_msg)
 main_msg['From'] = username
 main_msg['To'] = "1143402671@qq.com"
 main_msg['Subject'] = "[sxtwl]打包结果通知"
-main_msg['Date'] = email.Utils.formatdate( )
+main_msg['Date'] = formatdate( )
  
 # 得到格式化后的完整文本
 fullText = main_msg.as_string( )
