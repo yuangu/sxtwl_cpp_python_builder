@@ -83,7 +83,7 @@ server = smtplib.SMTP('smtp.126.com')
 server.login(username,passwd)
 main_msg = MIMEMultipart.MIMEMultipart()
 # 构造MIMEText对象做为邮件显示内容并附加到根容器
-text_msg = MIMEText.MIMEText("this is a test text to text mime")
+text_msg = MIMEText.MIMEText("这是一封自动发送的邮件。请不要回复。",'plain', "utf-8")
 main_msg.attach(text_msg)
  
 # 构造MIMEBase对象做为文件附件内容并附加到根容器
@@ -106,9 +106,19 @@ main_msg.attach(file_msg)
 # 设置根容器属性
 main_msg['From'] = username
 main_msg['To'] = "1143402671@qq.com"
-main_msg['Subject'] = "[sxtwl]打包结果通知"
+# main_msg['Subject'] = "[sxtwl]打包结果通知"
 main_msg['Date'] = formatdate( )
  
+#带上python版本的信息
+ext = ""
+if "PYTHON_VERSION" in  os.environ:
+    ext += "Python_" + os.environ['PYTHON_VERSION']
+
+if "PYTHON_ARCH" in  os.environ:
+    ext += "_" + os.environ['PYTHON_ARCH']
+
+main_msg['Subject'] = "[sxtwl]打包结果通知" + '('+ ext + ')'
+
 # 得到格式化后的完整文本
 fullText = main_msg.as_string( )
  

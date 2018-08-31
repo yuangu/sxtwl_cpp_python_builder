@@ -66,12 +66,15 @@ build_script:
   # - IF "%PYTHON_ARCH%"=="64" (call "C:\Program Files\Microsoft SDKs\Windows\v7.1\Bin\SetEnv.cmd" /x64) ELSE (ECHO "probably a 32bit build")
   - set PATH=%PYTHON%;%PYTHON%\\scripts;%PATH%
   - set VS90COMNTOOLS=%VS140COMNTOOLS%
+  - set VS100COMNTOOLS=%VS140COMNTOOLS%
   - echo %VS90COMNTOOLS%
+  
   - cd "c:\Users\appveyor\AppData\Local\Programs\Common\Microsoft\"
   - ren "Visual C++ for Python" "Visual C++ for Python Do Not Use"
-  - cd "C:\Program Files (x86)\"
-  - ps: "ls \"C:/Program Files (x86)\""
+  
+  - cd "C:\Program Files (x86)\" 
   - ren "Microsoft Visual Studio 9.0" "Microsoft Visual Studio 9.0 Do Not Use"
+  - ren "Microsoft Visual Studio 10.0" "Microsoft Visual Studio 10.0 Do Not Use"
 
   - "pip --version"
   - "pip install --upgrade setuptools"
