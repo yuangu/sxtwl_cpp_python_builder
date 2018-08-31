@@ -1,21 +1,14 @@
 environment:
    
 
-  matrix:
-
-    # Python 2.7.10 is the latest version and is not pre-installed.
-
-    - PYTHON: "C:\\Python27.10"
-      PYTHON_VERSION: "2.7.10"
+  matrix:   
+    - PYTHON: "C:\\Python26"
+      PYTHON_VERSION: "2.6.x" # currently 2.7.9
       PYTHON_ARCH: "32"
 
-    - PYTHON: "C:\\Python27.10-x64"
-      PYTHON_VERSION: "2.7.10"
+    - PYTHON: "C:\\Python26-x64"
+      PYTHON_VERSION: "2.6.x" # currently 2.7.9
       PYTHON_ARCH: "64"
-
-    # Pre-installed Python versions, which Appveyor may upgrade to
-    # a later point release.
-    # See: https://www.appveyor.com/docs/installed-software#python
 
     - PYTHON: "C:\\Python27"
       PYTHON_VERSION: "2.7.x" # currently 2.7.9
@@ -41,6 +34,14 @@ environment:
       PYTHON_VERSION: "3.4.x" # currently 3.4.3
       PYTHON_ARCH: "64"
 
+    - PYTHON: "C:\\Python35"
+      PYTHON_VERSION: "3.5.x" # currently 3.4.3
+      PYTHON_ARCH: "32"
+
+    - PYTHON: "C:\\Python35-x64"
+      PYTHON_VERSION: "3.5.x" # currently 3.4.3
+      PYTHON_ARCH: "64"
+
     - PYTHON: "C:\\Python36"
       PYTHON_VERSION: "3.6.x" # currently 3.6.5
       PYTHON_ARCH: "32"
@@ -49,36 +50,12 @@ environment:
       PYTHON_VERSION: "3.6.x" # currently 3.6.5
       PYTHON_ARCH: "64"
 
-    # Python versions not pre-installed
-
-    # Python 2.6.6 is the latest Python 2.6 with a Windows installer
-    # See: https://github.com/ogrisel/python-appveyor-demo/issues/10
-
-    - PYTHON: "C:\\Python266"
-      PYTHON_VERSION: "2.6.6"
+    - PYTHON: "C:\\Python37"
+      PYTHON_VERSION: "3.7.x" # currently 3.6.5
       PYTHON_ARCH: "32"
 
-    - PYTHON: "C:\\Python266-x64"
-      PYTHON_VERSION: "2.6.6"
-      PYTHON_ARCH: "64"
-
-    - PYTHON: "C:\\Python35"
-      PYTHON_VERSION: "3.5.0"
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python35-x64"
-      PYTHON_VERSION: "3.5.0"
-      PYTHON_ARCH: "64"
-
-    # Major and minor releases (i.e x.0.0 and x.y.0) prior to 3.3.0 use
-    # a different naming scheme.
-
-    - PYTHON: "C:\\Python270"
-      PYTHON_VERSION: "2.7.0"
-      PYTHON_ARCH: "32"
-
-    - PYTHON: "C:\\Python270-x64"
-      PYTHON_VERSION: "2.7.0"
+    - PYTHON: "C:\\Python37-x64"
+      PYTHON_VERSION: "3.7.x" # currently 3.6.5
       PYTHON_ARCH: "64"
 
 build_script:
@@ -93,6 +70,7 @@ build_script:
   - cd "c:\Users\appveyor\AppData\Local\Programs\Common\Microsoft\"
   - ren "Visual C++ for Python" "Visual C++ for Python Do Not Use"
   - cd "C:\Program Files (x86)\"
+  - ps: "ls \"C:/Program Files (x86)\""
   - ren "Microsoft Visual Studio 9.0" "Microsoft Visual Studio 9.0 Do Not Use"
 
   - "pip --version"
@@ -109,7 +87,7 @@ build_script:
 
   
   # Build the compiled extension
-  - python build.py
+  - C:/Python27/python.exe build.py
   # - cd ./sxtwl_cpp/python
   # - python setup.py  bdist_wininst
   # - cd ../../
