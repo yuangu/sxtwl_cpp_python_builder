@@ -76,10 +76,10 @@ build_script:
   - ren "Microsoft Visual Studio 9.0" "Microsoft Visual Studio 9.0 Do Not Use"
   - ren "Microsoft Visual Studio 10.0" "Microsoft Visual Studio 10.0 Do Not Use"
 
-  - "pip --version"
-  - "pip install --upgrade setuptools"
-  - "python -m pip install wheel"
-  - "python -m pip install twine"
+  # - "pip --version"
+  # - "pip install --upgrade setuptools"
+  # - "python -m pip install wheel"
+  # - "python -m pip install twine"
   - "python --version"
   # - "%PYTHON%\\python.exe -c \"import struct;print( 8 * struct.calcsize('P'))\""
 
