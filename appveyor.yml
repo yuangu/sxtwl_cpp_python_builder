@@ -81,6 +81,7 @@ build_script:
   # - "python -m pip install wheel"
   # - "python -m pip install twine"
   - "python --version"
+  - "python -m pip install setuptools --upgrade"
   # - "%PYTHON%\\python.exe -c \"import struct;print( 8 * struct.calcsize('P'))\""
 
   - echo %APPVEYOR_REPO_BRANCH%
