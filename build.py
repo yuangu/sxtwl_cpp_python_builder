@@ -3,6 +3,7 @@ import os
 import sys
 import platform
 import smtplib
+from utils import Utils
 if sys.version_info < (3, 0):
     from email import MIMEMultipart
     from email import MIMEText
@@ -58,20 +59,18 @@ os.chdir(os.path.join(pyPath, "./sxtwl_cpp/python"))
 print("=================开始执行python setup.py ========")
 if platform.system() == 'Windows':
     print("打包执行中")
-    print(os.system("python setup.py  bdist_wininst"))
+    #print(os.system("python setup.py  bdist_wininst"))
+    print(os.system("python setup.py bdist_wheel"))
 print("=================打包完成========")
 
 
 #更换到打包好的目录里
-os.chdir(os.path.join(pyPath, "./sxtwl_cpp/python/dist"))
+# os.chdir(os.path.join(pyPath, "./sxtwl_cpp/python/dist"))
 
-file_name = ""
-dirs = os.listdir( "./" )
+file_name = "dist.zip"
+Utils.makeZipFile(file_name, os.path.join(pyPath, "./sxtwl_cpp/python/dist"))
 
-for file in dirs:
-   if file[-3:] == "exe":
-        file_name = file
-      
+
 
 #帐号和密码来源https://github.com/normal-four/test/blob/815393a266142ba64df0402f9a6c15c203b95156/spider/mailtest.py
 
