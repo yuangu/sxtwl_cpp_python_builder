@@ -1,4 +1,5 @@
 #-*-coding:utf-8-*-
+#build for sxtwl 1.0.7
 import os
 import sys
 import platform
