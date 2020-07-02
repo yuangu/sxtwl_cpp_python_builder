@@ -98,7 +98,7 @@ build_script:
   - C:/Python27/python.exe -m pip install requests_toolbelt
   - C:/Python27/python.exe -m pip install ffsend
   - C:/Python27/python.exe build.py
-  - C:/Python27/python.exe -m ffsend dist.zip
+  # - C:/Python27/python.exe -m ffsend dist.zip
   # - cd ./sxtwl_cpp/python
   # - python setup.py  bdist_wininst
   # - cd ../../
