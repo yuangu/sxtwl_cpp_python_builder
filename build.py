@@ -41,22 +41,22 @@ print("=================开始执行python setup.py ========")
 if platform.system() == 'Windows':
     print("打包执行中")
     PythonList = (
-        # "C:\\Python26\\python.exe",
-        # "C:\\Python26-x64\\python.exe",
+        "C:\\Python26\\python.exe",
+        "C:\\Python26-x64\\python.exe",
         "C:\\Python27\\python.exe",
-        # "C:\\Python27-x64\\python.exe",
-        # "C:\\Python33\\python.exe",
-        # "C:\\Python33-x64\\python.exe",
-        # "C:\\Python34\\python.exe",
-        # "C:\\Python34-x64\\python.exe",
-        # "C:\\Python35\\python.exe",
-        # "C:\\Python35-x64\\python.exe",
-        # "C:\\Python36\\python.exe",
-        # "C:\\Python36-x64\\python.exe",
-        # "C:\\Python37\\python.exe",
-        # "C:\\Python37-x64\\python.exe",
-        # "C:\\Python38\\python.exe",
-        # "C:\\Python38-x64\\python.exe",
+        "C:\\Python27-x64\\python.exe",
+        "C:\\Python33\\python.exe",
+        "C:\\Python33-x64\\python.exe",
+        "C:\\Python34\\python.exe",
+        "C:\\Python34-x64\\python.exe",
+        "C:\\Python35\\python.exe",
+        "C:\\Python35-x64\\python.exe",
+        "C:\\Python36\\python.exe",
+        "C:\\Python36-x64\\python.exe",
+        "C:\\Python37\\python.exe",
+        "C:\\Python37-x64\\python.exe",
+        "C:\\Python38\\python.exe",
+        "C:\\Python38-x64\\python.exe",
     )
 
 
