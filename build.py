@@ -75,7 +75,7 @@ print("=================打包完成========")
 
 file_name = "dist.zip"
 Utils.makeZipFile(file_name, os.path.join(pyPath, "./sxtwl_cpp/python/dist"))
-print u"打包zip包完成"
+print("打包zip包完成")
 
 
 
