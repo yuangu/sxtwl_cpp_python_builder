@@ -1,5 +1,7 @@
-# os:
-# - Mac OS X
+image:
+  - Visual Studio 2015
+  - Ubuntu
+  - macOS
 
 environment:
   matrix:
