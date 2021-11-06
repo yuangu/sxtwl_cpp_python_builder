@@ -1,5 +1,5 @@
-os:
-- Mac OS X
+# os:
+# - Mac OS X
 
 environment:
   matrix:
