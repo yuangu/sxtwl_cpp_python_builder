@@ -11,10 +11,8 @@ environment:
   # - BUILDFOR: php
 
 install:
-# 环境设置完毕后，交由python来处理
-  - ps:  $env:CI_WINDOWS | C:/Python37/python.exe  work.py
-
- 
+  # 环境设置完毕后，交由python来处理
+  - cmd: C:/Python37/python.exe  work.py
   - sh: $HOME/venv3.7/bin/python work.py
 
 build: off
