@@ -3,9 +3,10 @@ import platform
 
 class PythonBuild(base.BuildBase):
     pythonList = []
+    twinePython = '' #用户twine提交的python
+
 
     def before_build(self):
-        print("os:", platform.system())
         if platform.system() == 'Windows':
             # self.cmd('set PATH=%PYTHON%;%PYTHON%//scripts;%PATH%')
             # self.cmd('set VS90COMNTOOLS=%VS140COMNTOOLS%')
@@ -44,6 +45,9 @@ class PythonBuild(base.BuildBase):
                 "C:\\Python38\\python.exe",
                 "C:\\Python38-x64\\python.exe",
             ]
+
+            self.twinePython = "C:\\Python36-x64\\python.exe"
+
         elif platform.system() == "Linux":
             self.pythonList = [
                 "$HOME/venv3.9/bin/python",
@@ -55,6 +59,8 @@ class PythonBuild(base.BuildBase):
                 "$HOME/venv2.7/bin/python",
                 "$HOME/venv2.6/bin/python",
             ]
+
+            self.twinePython = "$HOME/venv3.6/bin/python"
         elif platform.system() == "Mac":
             self.pythonList = [
                 "$HOME/venv3.9/bin/python",
@@ -66,6 +72,8 @@ class PythonBuild(base.BuildBase):
                 "$HOME/venv2.7/bin/python",
                # "$HOME/venv2.6/bin/python",
             ]
+
+            self.twinePython = "$HOME/venv3.6/bin/python"
 
 
         # 拉取代码
@@ -82,3 +90,12 @@ class PythonBuild(base.BuildBase):
             self.cmd( python + "  -m pip install --upgrade setuptools")
             self.cmd( python + "  -m pip  install wheel")
             self.cmd( python + "  setup.py bdist_wheel")
+
+    
+    def after_build(self):
+        if platform.system() == 'Windows':
+            self.cmd("echo %PATH%")
+        else:
+            self.cmd("echo $PATH")
+        # self.cmd(self.twinePython + "  -m pip install twine")
+        # self.cmd(self.twinePython + "  -m twine upload -u yuangu -p $TWINE_PASS dist/*")
