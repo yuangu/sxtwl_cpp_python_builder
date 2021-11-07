@@ -93,9 +93,8 @@ class PythonBuild(base.BuildBase):
 
     
     def after_build(self):
-        if platform.system() == 'Windows':
-            self.cmd("echo %PATH%")
+        if self.getEnv("PUSH_PIP") == 'true':
+            self.cmd(self.twinePython + "  -m pip install twine")
+            self.cmd(self.twinePython + "  -m twine upload -u yuangu -p $TWINE_PASS dist/*")
         else:
-            self.cmd("echo $PATH")
-        # self.cmd(self.twinePython + "  -m pip install twine")
-        # self.cmd(self.twinePython + "  -m twine upload -u yuangu -p $TWINE_PASS dist/*")
+            print("^_^不需要上传pip，只是做编译测试使用")
