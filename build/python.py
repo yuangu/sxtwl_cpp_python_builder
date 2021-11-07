@@ -8,8 +8,10 @@ class PythonBuild(base.BuildBase):
         print("os:", platform.system())
         if platform.system() == 'Windows':
             # self.cmd('set PATH=%PYTHON%;%PYTHON%//scripts;%PATH%')
-            self.cmd('set VS90COMNTOOLS=%VS140COMNTOOLS%')
-            self.cmd('set VS100COMNTOOLS=%VS140COMNTOOLS%')
+            # self.cmd('set VS90COMNTOOLS=%VS140COMNTOOLS%')
+            self.env('VS90COMNTOOLS', self.getEnv('VS140COMNTOOLS'))
+            # self.cmd('set VS100COMNTOOLS=%VS140COMNTOOLS%')
+            self.env('VS100COMNTOOLS', self.getEnv('VS140COMNTOOLS'))
             self.cmd('echo %VS90COMNTOOLS%')
 
             #self.cmd('cd "c:/Users/appveyor/AppData/Local/Programs/Common/Microsoft/"')

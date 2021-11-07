@@ -7,6 +7,12 @@ class BuildBase:
         print("==> run cmd:", cmd)
         os.system(cmd)
 
+    def env(self, key, value):
+        os.putenv( key, value)
+
+    def getEnv(self, key):
+        return os.getenv(key)
+
     def cd(self, path):
         print("==> cd:",  path)
         os.chdir( path)
