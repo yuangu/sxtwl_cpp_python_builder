@@ -5,11 +5,10 @@ image:
 
 environment:
   matrix:
-  - TOXENV: py27
-  - TOXENV: py35
-  - TOXENV: py36
-  - TOXENV: py37
-
+  - BUILDFOR: python
+  - BUILDFOR: c++
+  - BUILDFOR: lua
+  - BUILDFOR: php
 
 install:
 - cmd: 'set PATH=%PYTHON%;%PYTHON%\\scripts;%PATH%'
@@ -28,14 +27,11 @@ install:
 
 - cmd: 'IF "%PYTHON_ARCH%"=="64" (call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" amd64) ELSE ( call "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86)'
 - cmd: 'cd %APPVEYOR_BUILD_FOLDER%'  #回到原来目录里
+
+# 环境设置完毕后，交由python来处理
 - cmd: 'C:/Python37/python.exe  test.py'
-- sh:  $HOME/venv3.7/python  test.py
-
-
-
-
+- sh:  $HOME/venv3.7/bin/python  test.py
 
 build: off
-
 test: off
 
