@@ -31,7 +31,8 @@ install:
 # 环境设置完毕后，交由python来处理
 - cmd: 'C:/Python37/python.exe  main.py'
 - sh: ls
-- sh:  '$HOME/venv3.7/bin/python mian.py'
+- sh: ls $HOME/venv3.7/bin
+- sh: '$HOME/venv3.7/bin/python mian.py'
 
 build: off
 test: off
