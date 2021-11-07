@@ -12,7 +12,11 @@ environment:
 
 install:
 # 环境设置完毕后，交由python来处理
-- ps: C:/Python37/python.exe  work.py
+- ps:  |
+  if ($env:CI_WINDOWS -eq $true) {
+    C:/Python37/python.exe  work.py
+  }
+
 - sh: $HOME/venv3.7/bin/python work.py
 
 build: off
