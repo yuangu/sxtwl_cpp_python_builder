@@ -14,7 +14,7 @@ install:
 # 环境设置完毕后，交由python来处理
   - ps: |
     if ($env:CI_WINDOWS -eq $true) {
-      C:/Python37/python.exe  work.py
+      C:\Python37\python.exe  work.py
     }
 
  
