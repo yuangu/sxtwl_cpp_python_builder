@@ -4,7 +4,13 @@ class BuildBase:
     workDir = ""
 
     def cmd(self, cmd):
+        print("==> run cmd:", cmd)
         os.system(cmd)
+
+    def cd(self, path):
+        print("==> cd:",  path)
+        os.chdir( path)
+
 
     def before_build(self):
         pass
