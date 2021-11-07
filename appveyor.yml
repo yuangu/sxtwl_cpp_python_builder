@@ -32,7 +32,7 @@ install:
 - cmd: 'C:/Python37/python.exe  main.py'
 - sh: ls
 - sh: ls $HOME/venv3.7/bin
-- sh: '$HOME/venv3.7/bin/python mian.py'
+- sh: '$HOME/venv3.7/bin/python ./mian.py'
 
 build: off
 test: off
