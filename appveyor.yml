@@ -29,10 +29,8 @@ install:
 # - cmd: 'cd %APPVEYOR_BUILD_FOLDER%'  #回到原来目录里
 
 # 环境设置完毕后，交由python来处理
-- cmd: C:/Python37/python.exe  build.py
-- sh: ls
-- sh: ls $HOME/venv3.7/bin
-- sh: $HOME/venv3.7/bin/python build.py
+- cmd: C:/Python37/python.exe  work.py
+- sh: $HOME/venv3.7/bin/python work.py
 
 build: off
 test: off
