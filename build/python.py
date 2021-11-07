@@ -44,6 +44,29 @@ class PythonBuild(base.BuildBase):
                 "C:\\Python38\\python.exe",
                 "C:\\Python38-x64\\python.exe",
             ]
+        elif platform.system() == "Linux":
+            self.pythonList = [
+                "$HOME/venv3.9/bin/python",
+                "$HOME/venv3.8/bin/python",
+                "$HOME/venv3.7/bin/python",
+                "$HOME/venv3.6/bin/python",
+                "$HOME/venv3.5/bin/python",
+                "$HOME/venv3.4/bin/python",
+                "$HOME/venv2.7/bin/python",
+                "$HOME/venv2.6/bin/python",
+            ]
+        elif platform.system() == "Mac":
+            self.pythonList = [
+                "$HOME/venv3.9/bin/python",
+                "$HOME/venv3.8/bin/python",
+                "$HOME/venv3.7/bin/python",
+                "$HOME/venv3.6/bin/python",
+                "$HOME/venv3.5/bin/python",
+                #"$HOME/venv3.4/bin/python",
+                "$HOME/venv2.7/bin/python",
+               # "$HOME/venv2.6/bin/python",
+            ]
+
 
         # 拉取代码
         self.cmd("git clone https://github.com/yuangu/sxtwl_cpp.git")
