@@ -22,15 +22,18 @@ if os.getenv('BUILDFOR') == "python" :
 
     ## linux 需要在manylinux里构建 
     if platform.system() == "Linux" and os.getenv("INOS") != 'docker':
+        build.cmd("mkdir ./sxtwl_cpp/python/out")
+        build.cmd("mkdir ./sxtwl_cpp/python/out/dist")
+
         l = (
-            '-env PLA=manylinux1_x86_64 quay.io/pypa/manylinux1_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
-            '-env PLA=manylinux1_i686 quay.io/pypa/manylinux1_i686 /opt/python/cp36-cp36m/bin/python work.py',
-            '-env PLA=manylinux2010_x86_64 quay.io/pypa/manylinux2010_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
-            '-env PLA=manylinux2010_i686 quay.io/pypa/manylinux2010_i686 /opt/python/cp36-cp36m/bin/python work.py',
+            ('-env PLA=manylinux1_x86_64', 'quay.io/pypa/manylinux1_x86_64'),
+            # '-env PLA=manylinux1_i686 -i quay.io/pypa/manylinux1_i686 /opt/python/cp36-cp36m/bin/python work.py',
+            # '-env PLA=manylinux2010_x86_64 -i quay.io/pypa/manylinux2010_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
+            # '-env PLA=manylinux2010_i686 -i quay.io/pypa/manylinux2010_i686 /opt/python/cp36-cp36m/bin/python work.py',
         )
 
         for v in l:
-            cmd = "docker run --env BUILDFOR=python --env INOS=docker  -v $PWD:/work -w /work -i %s" %(v,)
+            cmd = "docker run --env BUILDFOR=python --env INOS=docker %s  -v $PWD:/work -w /work  -i %s  /opt/python/cp36-cp36m/bin/python work.py" %(v[0], v[1])
             build.cmd(cmd)
 
         # 不知道为啥docker里无法上传wheel包，可能是docker命令没有-t
