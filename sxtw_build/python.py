@@ -50,6 +50,9 @@ class PythonBuild(base.BuildBase):
             self.twinePython = "C:\\Python36-x64\\python.exe"
 
         elif platform.system() == "Linux":
+             # manylinux居然还少了环境
+            self.cmd('yum install -y libffi-devel')
+
             self.pythonList = [
                 # "$HOME/venv3.9/bin/python",
                 # "$HOME/venv3.8/bin/python",
@@ -71,9 +74,12 @@ class PythonBuild(base.BuildBase):
                 pythonPath = os.path.join(pythonPath, 'bin/python')
                 self.pythonList.append(pythonPath)
                 
-                if self.twinePython == '' and d.find("cp3") >=0:
-                    self.twinePython = pythonPath
-                
+                self.cmd(pythonPath + ' -m pip install cffi==1.14.5')
+                self.cmd(pythonPath + ' -m pip install pycparser==2.20')
+             
+            self.twinePython = '/opt/python/cp36-cp36m/bin/python'
+           
+
         elif platform.system() == "Darwin":
             self.pythonList = [
                 "$HOME/venv3.9/bin/python",

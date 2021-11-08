@@ -21,7 +21,7 @@ if os.getenv('BUILDFOR') == "python" :
         l = (
             'quay.io/pypa/manylinux1_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
             'quay.io/pypa/manylinux1_i686 /opt/python/cp36-cp36m/bin/python work.py',
-             'quay.io/pypa/manylinux2010_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
+            'quay.io/pypa/manylinux2010_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
             'quay.io/pypa/manylinux2010_i686 /opt/python/cp36-cp36m/bin/python work.py',
         )
 
