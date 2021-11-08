@@ -22,8 +22,8 @@ if os.getenv('BUILDFOR') == "python" :
 
     ## linux 需要在manylinux里构建 
     if platform.system() == "Linux" and os.getenv("INOS") != 'docker':
-        build.cmd("mkdir ./sxtwl_cpp/python/out")
-        build.cmd("mkdir ./sxtwl_cpp/python/out/dist")
+       
+        build.cmd("mkdir ./dist")
 
         l = (
             '--env PLA=manylinux1_x86_64  quay.io/pypa/manylinux1_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
@@ -38,9 +38,7 @@ if os.getenv('BUILDFOR') == "python" :
 
         # 不知道为啥docker里无法上传wheel包，可能是docker命令没有-t
         build.twinePython = "$HOME/venv3.6/bin/python"
-        build.cmd("ls ./sxtwl_cpp")
-        build.cmd("ls ./sxtwl_cpp/python")
-        build.cd("./sxtwl_cpp/python/out")
+        build.cmd("ls")
         build.after_build()        
     else:
     
