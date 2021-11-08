@@ -94,7 +94,7 @@ class PythonBuild(base.BuildBase):
 
             self.twinePython = "$HOME/venv3.6/bin/python"
 
-
+        
         # 拉取代码
         self.cmd("git clone https://github.com/yuangu/sxtwl_cpp.git")
         
@@ -110,7 +110,15 @@ class PythonBuild(base.BuildBase):
             self.cmd( python + "  -m pip  install wheel")
             self.cmd( python + "  setup.py bdist_wheel")
 
-    
+        if platform.system() == "Linux":
+            wheelList = os.listdir("./dist")
+            for d in wheelList:
+                wheelPath = os.path.join('./dist', d)
+                cmd = 'auditwheel repair %s --plat "$PLAT" -w ../dist/'%(wheelPath, )
+                self.cmd(cmd)
+            self.cmd("rm -rf ./dist")
+
+
     def after_build(self):
         if self.getEnv("PUSH_PIP") == 'true':
             

@@ -23,10 +23,10 @@ if os.getenv('BUILDFOR') == "python" :
     ## linux 需要在manylinux里构建 
     if platform.system() == "Linux" and os.getenv("INOS") != 'docker':
         l = (
-            'quay.io/pypa/manylinux1_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
-            'quay.io/pypa/manylinux1_i686 /opt/python/cp36-cp36m/bin/python work.py',
-            'quay.io/pypa/manylinux2010_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
-            'quay.io/pypa/manylinux2010_i686 /opt/python/cp36-cp36m/bin/python work.py',
+            '-env PLA=manylinux1_x86_64 quay.io/pypa/manylinux1_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
+            '-env PLA=manylinux1_i686 quay.io/pypa/manylinux1_i686 /opt/python/cp36-cp36m/bin/python work.py',
+            '-env PLA=manylinux2010_x86_64 quay.io/pypa/manylinux2010_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
+            '-env PLA=manylinux2010_i686 quay.io/pypa/manylinux2010_i686 /opt/python/cp36-cp36m/bin/python work.py',
         )
 
         for v in l:
@@ -35,7 +35,7 @@ if os.getenv('BUILDFOR') == "python" :
 
         # 不知道为啥docker里无法上传wheel包，可能是docker命令没有-t
         build.twinePython = "$HOME/venv3.6/bin/python"
-        build.cd("./sxtwl_cpp/python")
+        #build.cd("./sxtwl_cpp/python")
         build.after_build()        
     else:
     
