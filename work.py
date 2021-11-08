@@ -18,8 +18,16 @@ sys.path.append( os.path.join(pyPath,  "./sxtw_build"))
 ## 如果是python构建任务，执行python构建任务
 if os.getenv('BUILDFOR') == "python" :
     if platform.system() == "Linux" and os.getenv("INOS") != 'docker':
-        cmd = "docker run --env BUILDFOR=python --env INOS=docker --env TWINE_PASS=$TWINE_PASS --env PUSH_PIP=$PUSH_PIP -v $PWD:/work -w /work -i quay.io/pypa/manylinux_2_24_x86_64 /opt/python/cp36-cp36m/bin/python work.py"
-        os.system(cmd)
+        l = (
+            'quay.io/pypa/manylinux1_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
+            'quay.io/pypa/manylinux1_i686 /opt/python/cp36-cp36m/bin/python work.py',
+             'quay.io/pypa/manylinux2010_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
+            'quay.io/pypa/manylinux2010_i686 /opt/python/cp36-cp36m/bin/python work.py',
+        )
+
+        for v in l:
+            cmd = "docker run --env BUILDFOR=python --env INOS=docker --env TWINE_PASS=$TWINE_PASS --env PUSH_PIP=$PUSH_PIP -v $PWD:/work -w /work -i %s" %(v,)
+            os.system(cmd)
         exit()
 
     from sxtw_build.python import PythonBuild 
