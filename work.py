@@ -35,7 +35,7 @@ if os.getenv('BUILDFOR') == "python" :
 
         # 不知道为啥docker里无法上传wheel包，可能是docker命令没有-t
         build.twinePython = "$HOME/venv3.6/bin/python"
-        #build.cd("./sxtwl_cpp/python")
+        build.cd("./sxtwl_cpp/python/out")
         build.after_build()        
     else:
     

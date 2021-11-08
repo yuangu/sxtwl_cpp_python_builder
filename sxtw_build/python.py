@@ -114,7 +114,7 @@ class PythonBuild(base.BuildBase):
             wheelList = os.listdir("./dist")
             for d in wheelList:
                 wheelPath = os.path.join('./dist', d)
-                cmd = 'auditwheel repair %s --plat "$PLAT" -w ../dist/'%(wheelPath, )
+                cmd = 'auditwheel repair %s --plat "$PLAT" -w ./out/dist/'%(wheelPath, )
                 self.cmd(cmd)
             self.cmd("rm -rf ./dist")
 
