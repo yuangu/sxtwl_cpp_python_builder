@@ -62,7 +62,7 @@ class PythonBuild(base.BuildBase):
             ]
 
             self.twinePython = "$HOME/venv3.6/bin/python"
-        elif platform.system() == "Mac":
+        elif platform.system() == "Darwin":
             self.pythonList = [
                 "$HOME/venv3.9/bin/python",
                 "$HOME/venv3.8/bin/python",
