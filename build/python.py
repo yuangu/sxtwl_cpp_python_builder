@@ -1,5 +1,6 @@
 import  base
 import platform
+import os
 
 class PythonBuild(base.BuildBase):
     pythonList = []
@@ -95,6 +96,12 @@ class PythonBuild(base.BuildBase):
     def after_build(self):
         if self.getEnv("PUSH_PIP") == 'true':
             self.cmd(self.twinePython + "  -m pip install twine")
-            self.cmd(self.twinePython + "  -m twine upload -u yuangu -p $TWINE_PASS dist/*")
+            if platform.system() == 'Windows':
+                self.cmd(self.twinePython + '  -m twine upload -u yuangu -p %TWINE_PASS% dist/*')
+            else:
+                self.cmd(self.twinePython + "  -m twine upload -u yuangu -p $TWINE_PASS dist/*")
         else:
             print("^_^不需要上传pip，只是做编译测试使用")
+            from utils import Utils
+            file_name = "python_dist.zip" 
+            Utils.makeZipFile(file_name, "./dist")
