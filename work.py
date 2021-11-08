@@ -17,6 +17,10 @@ sys.path.append( os.path.join(pyPath,  "./sxtw_build"))
 
 ## 如果是python构建任务，执行python构建任务
 if os.getenv('BUILDFOR') == "python" :
+    from sxtw_build.python import PythonBuild 
+    build = PythonBuild()
+
+    ## linux 需要在manylinux里构建 
     if platform.system() == "Linux" and os.getenv("INOS") != 'docker':
         l = (
             'quay.io/pypa/manylinux1_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
@@ -26,13 +30,16 @@ if os.getenv('BUILDFOR') == "python" :
         )
 
         for v in l:
-            cmd = "docker run --env BUILDFOR=python --env INOS=docker --env TWINE_PASS=$TWINE_PASS --env PUSH_PIP=$PUSH_PIP -v $PWD:/work -w /work -i %s" %(v,)
-            os.system(cmd)
-        exit()
+            cmd = "docker run --env BUILDFOR=python --env INOS=docker  -v $PWD:/work -w /work -i %s" %(v,)
+            build.cmd(cmd)
 
-    from sxtw_build.python import PythonBuild 
-    # from build import python
-    PythonBuild().run()
+        # 不知道为啥docker里无法上传wheel包，可能是docker命令没有-t
+        build.twinePython = "$HOME/venv3.6/bin/python"
+        build.cd("./sxtwl_cpp/python")
+        build.after_build()        
+    else:
+    
+        build.run()
 else:
     print("不支持的构建语言目标")
 
