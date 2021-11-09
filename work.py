@@ -26,10 +26,12 @@ if os.getenv('BUILDFOR') == "python" :
         build.cmd("mkdir ./dist")
 
         l = (
-            '--env PLA=manylinux1_x86_64  quay.io/pypa/manylinux1_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
-            # '--env PLA=manylinux1_i686 -i quay.io/pypa/manylinux1_i686 /opt/python/cp36-cp36m/bin/python work.py',
-            # '--env PLA=manylinux2010_x86_64 -i quay.io/pypa/manylinux2010_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
-            # '--env PLA=manylinux2010_i686 -i quay.io/pypa/manylinux2010_i686 /opt/python/cp36-cp36m/bin/python work.py',
+            '--env PLAT=manylinux1_x86_64 -i quay.io/pypa/manylinux1_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
+            '--env PLAT=manylinux1_i686 -i quay.io/pypa/manylinux1_i686 /opt/python/cp36-cp36m/bin/python work.py',
+            '--env PLAT=manylinux2010_x86_64 -i quay.io/pypa/manylinux2010_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
+            '--env PLAT=manylinux2010_i686 -i quay.io/pypa/manylinux2010_i686 /opt/python/cp36-cp36m/bin/python work.py',
+            '--env PLAT=manylinux2014_x86_64 -i quay.io/pypa/manylinux2014_x86_64 /opt/python/cp36-cp36m/bin/python work.py',
+            '--env PLAT=manylinux2014_i686 -i quay.io/pypa/manylinux2014_i686 /opt/python/cp36-cp36m/bin/python work.py',
         )
 
         for v in l:
