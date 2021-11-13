@@ -125,6 +125,8 @@ class PythonBuild(base.BuildBase):
 
             self.cmd(self.twinePython + "  -m pip install twine")
             if platform.system() == 'Windows':
+                self.cmd(self.twinePython + '  -m twine upload --skip-existing -u yuangu -p %TWINE_PASS% dist/*')
+
                 # 源代码的生成由window来完成
                 self.cmd(self.twinePython + '  setup.py sdist')
 
