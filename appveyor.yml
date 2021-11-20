@@ -12,10 +12,11 @@ environment:
 
 install:
   # 环境设置完毕后，交由python来处理
-  # 64位的python安装 
-  - cmd: choco install -y python3 --version 3.9.7 --ignore-dependencies  --side-by-side --installarguments "'/quiet  InstallAllUsers=1 TargetDir=c:\Python39-x64'"
-  - cmd: choco install -y python3 --version 3.10.0   --ignore-dependencies --side-by-side --installarguments "'/quiet  InstallAllUsers=1 TargetDir=c:\Python310-x64'"
+  # python3.9
+  - cmd: choco install -y python3 --version 3.9.7 --force --ignore-dependencies  --side-by-side --installarguments "'/quiet  InstallAllUsers=1 TargetDir=c:\Python39-x64'"
   - cmd: choco install -y python3 --version 3.9.7  --force --ignore-dependencies --x86 --side-by-side --installarguments "'/quiet  InstallAllUsers=1 TargetDir=c:\Python39'"
+  # python3.10
+  - cmd: choco install -y python3 --version 3.10.0 --force --ignore-dependencies --side-by-side --installarguments "'/quiet  InstallAllUsers=1 TargetDir=c:\Python310-x64'"
   - cmd: choco install -y python3 --version 3.10.0 --force --ignore-dependencies --x86 --side-by-side --installarguments "'/quiet  InstallAllUsers=1 TargetDir=c:\Python310'"
 
   - cmd: C:/Python37/python.exe  work.py
