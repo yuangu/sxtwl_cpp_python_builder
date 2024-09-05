@@ -89,13 +89,22 @@ class PythonBuild(base.BuildBase):
            
 
         elif platform.system() == "Darwin":
+            self.cmd('pyenv install 3.4.10')
+            self.cmd('pyenv install 3.5.10')
+            self.cmd('pyenv install 3.6.14')
+            self.cmd('pyenv install 3.5.10')
+            self.cmd('pyenv install 3.7.17')
+
             self.pythonList = [
+                "$HOME/venv3.12/bin/python",
+                "$HOME/venv3.11/bin/python",
+                "$HOME/venv3.10/bin/python",
                 "$HOME/venv3.9/bin/python",
                 "$HOME/venv3.8/bin/python",
                 "$HOME/venv3.7/bin/python",
                 "$HOME/venv3.6/bin/python",
                 "$HOME/venv3.5/bin/python",
-                #"$HOME/venv3.4/bin/python",
+                "$HOME/venv3.4/bin/python",
                 "$HOME/venv2.7/bin/python",
                # "$HOME/venv2.6/bin/python",
             ]
