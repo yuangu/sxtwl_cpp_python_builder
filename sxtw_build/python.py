@@ -49,6 +49,10 @@ class PythonBuild(base.BuildBase):
                 "C:\\Python39-x64\\python.exe",
                 "C:\\Python310\\python.exe",
                 "C:\\Python310-x64\\python.exe",
+                "C:\\Python311\\python.exe",
+                "C:\\Python311-x64\\python.exe",
+                "C:\\Python312\\python.exe",
+                "C:\\Python312-x64\\python.exe",
             ]
 
             self.twinePython = "C:\\Python36-x64\\python.exe"
