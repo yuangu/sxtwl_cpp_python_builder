@@ -5,8 +5,7 @@ image:
 
 environment:
   matrix:
-    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
-      PYTHON: "C:\\Python26"
+    - PYTHON: "C:\\Python26"
     - PYTHON: "C:\\Python27"
     - PYTHON: "C:\\Python33"
     - PYTHON: "C:\\Python34"
