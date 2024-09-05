@@ -30,7 +30,7 @@ install:
 
 
   - cmd: C:/Python37/python.exe  work.py
-  - sh: $HOME/venv3.7/bin/python work.py
+  - sh: $HOME/venv3.8/bin/python work.py
 
 build: off
 test: off

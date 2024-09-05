@@ -89,8 +89,8 @@ class PythonBuild(base.BuildBase):
            
 
         elif platform.system() == "Darwin":
-            self.cmd('pyenv install 3.4.10')
-            self.cmd('pyenv install 3.5.10')
+            # self.cmd('pyenv install 3.4.10')
+            # self.cmd('pyenv install 3.5.10')
             self.cmd('pyenv install 3.6.14')
             self.cmd('pyenv install 3.5.10')
             self.cmd('pyenv install 3.7.17')
@@ -103,8 +103,8 @@ class PythonBuild(base.BuildBase):
                 "$HOME/venv3.8/bin/python",
                 "$HOME/venv3.7/bin/python",
                 "$HOME/venv3.6/bin/python",
-                "$HOME/venv3.5/bin/python",
-                "$HOME/venv3.4/bin/python",
+                # "$HOME/venv3.5/bin/python",
+                # "$HOME/venv3.4/bin/python",
                 "$HOME/venv2.7/bin/python",
                # "$HOME/venv2.6/bin/python",
             ]
@@ -150,7 +150,7 @@ class PythonBuild(base.BuildBase):
 
                 # self.cmd(self.twinePython + '  -m twine upload --skip-existing -u %TWINE_USER% -p %TWINE_PASS% dist/*')
             else:
-                self.cmd(self.twinePython + "  -m twine upload --skip-existing -u $ %TWINE_USER% -p $TWINE_PASS dist/*")
+                self.cmd(self.twinePython + "  -m twine upload --skip-existing -u $ $TWINE_USER -p $TWINE_PASS dist/*")
         else:
             print("^_^不需要上传pip，只是做编译测试使用")
             from utils import Utils
