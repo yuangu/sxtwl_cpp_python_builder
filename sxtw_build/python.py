@@ -142,14 +142,14 @@ class PythonBuild(base.BuildBase):
 
             self.cmd(self.twinePython + "  -m pip install twine")
             if platform.system() == 'Windows':
-                self.cmd(self.twinePython + '  -m twine upload --skip-existing -u yuangu -p %TWINE_PASS% dist/*')
+                self.cmd(self.twinePython + '  -m twine upload --skip-existing -u %TWINE_USER% -p %TWINE_PASS% dist/*')
 
-                # 源代码的生成由window来完成
-                self.cmd(self.twinePython + '  setup.py sdist')
+                # # 源代码的生成由window来完成
+                # self.cmd(self.twinePython + '  setup.py sdist')
 
-                self.cmd(self.twinePython + '  -m twine upload --skip-existing -u yuangu -p %TWINE_PASS% dist/*')
+                # self.cmd(self.twinePython + '  -m twine upload --skip-existing -u  %TWINE_USER% -p %TWINE_PASS% dist/*')
             else:
-                self.cmd(self.twinePython + "  -m twine upload --skip-existing -u yuangu -p $TWINE_PASS dist/*")
+                self.cmd(self.twinePython + "  -m twine upload --skip-existing -u $ %TWINE_USER% -p $TWINE_PASS dist/*")
         else:
             print("^_^不需要上传pip，只是做编译测试使用")
             from utils import Utils
