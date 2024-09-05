@@ -39,7 +39,7 @@ if os.getenv('BUILDFOR') == "python" :
             build.cmd(cmd)
 
         # 不知道为啥docker里无法上传wheel包，可能是docker命令没有-t
-        build.twinePython = "$HOME/venv3.6/bin/python"
+        build.twinePython = "$HOME/venv3.8/bin/python"
         build.cmd("ls")
         build.after_build()        
     else:

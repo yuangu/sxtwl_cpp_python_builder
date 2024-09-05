@@ -55,7 +55,7 @@ class PythonBuild(base.BuildBase):
                 "C:\\Python312-x64\\python.exe",
             ]
 
-            self.twinePython = "C:\\Python36-x64\\python.exe"
+            self.twinePython = "C:\\Python38-x64\\python.exe"
 
         elif platform.system() == "Linux":
              # manylinux居然还少了环境
@@ -85,7 +85,7 @@ class PythonBuild(base.BuildBase):
                 self.cmd(pythonPath + ' -m pip install cffi==1.14.5')
                 self.cmd(pythonPath + ' -m pip install pycparser==2.20')
              
-            self.twinePython = '/opt/python/cp36-cp36m/bin/python'
+            self.twinePython = '/opt/python/cp368-cp38m/bin/python'
            
 
         elif platform.system() == "Darwin":
@@ -109,7 +109,7 @@ class PythonBuild(base.BuildBase):
                # "$HOME/venv2.6/bin/python",
             ]
 
-            self.twinePython = "$HOME/venv3.6/bin/python"
+            self.twinePython = "$HOME/venv3.8/bin/python"
 
         
         # 拉取代码
