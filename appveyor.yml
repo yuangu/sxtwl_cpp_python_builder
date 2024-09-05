@@ -5,23 +5,49 @@ image:
 
 environment:
   matrix:
-  - BUILDFOR: python
-  # - BUILDFOR: c++
-  # - BUILDFOR: lua
-  # - BUILDFOR: php
+    - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2019
+      PYTHON: "C:\\Python26"
+    - PYTHON: "C:\\Python27"
+    - PYTHON: "C:\\Python33"
+    - PYTHON: "C:\\Python34"
+    - PYTHON: "C:\\Python35"
+    - PYTHON: "C:\\Python36"
+    - PYTHON: "C:\\Python37"
+    - PYTHON: "C:\\Python38"
+    - PYTHON: "C:\\Python39"
+    - PYTHON: "C:\\Python310"
+    - PYTHON: "C:\\Python311"
+    - PYTHON: "C:\\Python312"
+    - PYTHON: "C:\\Python26-x64"
+    - PYTHON: "C:\\Python27-x64"
+    - PYTHON: "C:\\Python33-x64"
+    - PYTHON: "C:\\Python34-x64"
+    - PYTHON: "C:\\Python35-x64"
+    - PYTHON: "C:\\Python36-x64"
+    - PYTHON: "C:\\Python37-x64"
+    - PYTHON: "C:\\Python38-x64"
+    - PYTHON: "C:\\Python39-x64"
+    - PYTHON: "C:\\Python310-x64"
+    - PYTHON: "C:\\Python311-x64"
+    - PYTHON: "C:\\Python312-x64"
 
 install:
-  # 环境设置完毕后，交由python来处理
-  # # python3.9
-  # - cmd: choco install -y python3 --version 3.9.7 --force --ignore-dependencies  --side-by-side --installarguments "'/quiet  InstallAllUsers=1 TargetDir=c:\Python39-x64'"
-  # - cmd: choco install -y python3 --version 3.9.7  --force --ignore-dependencies --x86 --side-by-side --installarguments "'/quiet  InstallAllUsers=1 TargetDir=c:\Python39'"
-  # # python3.10
-  # - cmd: choco install -y python3 --version 3.10.0 --force --ignore-dependencies --side-by-side --installarguments "'/quiet  InstallAllUsers=1 TargetDir=c:\Python310-x64'"
-  # - cmd: choco install -y python3 --version 3.10.0 --force --ignore-dependencies --x86 --side-by-side --installarguments "'/quiet  InstallAllUsers=1 TargetDir=c:\Python310'"
+  - cmd: |
+    SET VS90COMNTOOLS=%VS140COMNTOOLS%
+    SET VS100COMNTOOLS=%VS140COMNTOOLS%
+    ren "Visual C++ for Python" "Visual C++ for Python Do Not Use"
+    ren "Microsoft Visual Studio 9.0" "Microsoft Visual Studio 9.0 Do Not Use"
+    ren "Microsoft Visual Studio 10.0" "Microsoft Visual Studio 10.0 Do Not Use"
+    "%PYTHON%\\python.exe" -m pip install --upgrade pip
+    "%PYTHON%\\python.exe" -m pip install wheel  
+    "%PYTHON%\\python.exe" -m pip install setuptools
+    git clone https://github.com/yuangu/sxtwl_cpp.git
 
-  - cmd: C:/Python37/python.exe  work.py
-  - sh: $HOME/venv3.7/bin/python work.py
+build_script:
+  - cmd: |
+    cd sxtwl_cpp/python
+    "%PYTHON%\\python.exe" setup.py bdist_wheel
+ 
 
-build: off
-test: off
+
 
