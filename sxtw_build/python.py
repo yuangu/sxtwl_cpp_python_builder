@@ -150,7 +150,7 @@ class PythonBuild(base.BuildBase):
 
                 # self.cmd(self.twinePython + '  -m twine upload --skip-existing -u %TWINE_USER% -p %TWINE_PASS% dist/*')
             else:
-                self.cmd(self.twinePython + "  -m twine upload --skip-existing -u $ $TWINE_USER -p $TWINE_PASS dist/*")
+                self.cmd(self.twinePython + "  -m twine upload --skip-existing -u $TWINE_USER -p $TWINE_PASS dist/*")
         else:
             print("^_^不需要上传pip，只是做编译测试使用")
             from utils import Utils
